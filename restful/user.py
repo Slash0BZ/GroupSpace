@@ -4,6 +4,7 @@ class User:
 		self.username = u
 		self.password = p
 		self.login_status = False
+
 	def login(self):
 		db = database.Database()
 		result = db.queryByValue("user", [("username", self.username),
