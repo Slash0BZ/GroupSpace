@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <style>
+        .center {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .entry:not(:first-of-type) {
+            margin-top: 10px;
+        }
+
+        .glyphicon {
+            font-size: 12px;
+        }
+        </style>
+
+
+        <script>
+        $(function()
+        {
+            $(document).on('click', '.btn-add', function(e)
+            {
+                e.preventDefault();
+
+                var controlForm = $('.controls .d1:first'),
+                    currentEntry = $(this).parents('.entry:first'),
+                    newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+                newEntry.find('input').val('');
+                controlForm.find('.entry:not(:last) .btn-add')
+                    .removeClass('btn-add').addClass('btn-remove')
+                    .removeClass('btn-success').addClass('btn-danger')
+                    .html('<span class="glyphicon glyphicon-minus"></span>');
+            }).on('click', '.btn-remove', function(e)
+            {
+                $(this).parents('.entry:first').remove();
+
+                e.preventDefault();
+                return false;
+            });
+        });
+
+        </script>
+    </head>
+<body>
+<div class="container">
+    <br/><br/>
+    <h1 class="center">Share Your Reservation</h1>
+    <br/><br/>
+
+    <form id="form_submit" action="" method="POST">
+        <div class="form-group center">
+            <div class="control-group" id="fields">
+                <div class="controls center"> 
+                    <div class="d1">
+                        <div class="entry input-group col-xs-6 center">
+                            <input class="form-control" name="fields[]" type="text" placeholder="netid@illinois.edu" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-success btn-add" type="button">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                <br>
+                </div>
+            </div>    
+
+            <button type="submit" class="btn btn-primary btn-lg">SHARE</button>
+            <br/><br/>
+            <button type="submit" class="btn btn-primary">Return To Reservations</button>
+        </div>
+    </form> 
+</div>
+</body>
+</html>
