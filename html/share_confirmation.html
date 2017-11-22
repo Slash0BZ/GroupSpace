@@ -1,3 +1,4 @@
+<!-- Page for sharing room reservation confirmation info with group members -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,12 +12,35 @@
             text-align: center;
         }
 
+        .btn-remove {
+            border: none;
+        }
+
+        .btn-add {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            padding: 10px 10px 10px 10px;
+            border-radius: 35px;
+        }
+
+        .shareButton {
+            border-radius: 10px;
+        }
+        .returnButton {
+            border-radius: 5px;
+        }
+
         .entry:not(:first-of-type) {
             margin-top: 10px;
         }
 
-        .glyphicon {
-            font-size: 12px;
+        .glyphicon-remove {
+            font-size: 10px;
+        }
+
+        .glyphicon-add {
+            font-size: 18px;
         }
         </style>
 
@@ -29,14 +53,11 @@
                 e.preventDefault();
 
                 var controlForm = $('.controls .d1:first'),
-                    currentEntry = $(this).parents('.entry:first'),
+                    currentEntry = $('.entry:first'),
                     newEntry = $(currentEntry.clone()).appendTo(controlForm);
 
-                newEntry.find('input').val('');
-                controlForm.find('.entry:not(:last) .btn-add')
-                    .removeClass('btn-add').addClass('btn-remove')
-                    .removeClass('btn-success').addClass('btn-danger')
-                    .html('<span class="glyphicon glyphicon-minus"></span>');
+                    newEntry.find('input').val('');
+
             }).on('click', '.btn-remove', function(e)
             {
                 $(this).parents('.entry:first').remove();
@@ -51,7 +72,7 @@
 <body>
 <div class="container">
     <br/><br/>
-    <h1 class="center">Share Your Reservation</h1>
+    <h3 class="center">SHARE YOUR RESERVATION</h3>
     <br/><br/>
 
     <form id="form_submit" action="" method="POST">
@@ -61,20 +82,41 @@
                     <div class="d1">
                         <div class="entry input-group col-xs-6 center">
                             <input class="form-control" name="fields[]" type="text" placeholder="netid@illinois.edu" />
+
                             <span class="input-group-btn">
-                                <button class="btn btn-success btn-add" type="button">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </button>
+                                <button class="btn-remove" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                            </span>
+                        </div>
+                        <div class="entry input-group col-xs-6 center">
+                            <input class="form-control" name="fields[]" type="text" placeholder="netid@illinois.edu" />
+
+                            <span class="input-group-btn">
+                                <button class="btn-remove" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                            </span>
+                        </div>
+                        <div class="entry input-group col-xs-6 center">
+                            <input class="form-control" name="fields[]" type="text" placeholder="netid@illinois.edu" />
+
+                            <span class="input-group-btn">
+                                <button class="btn-remove" type="button"><span class="glyphicon glyphicon-remove"></span></button>
                             </span>
                         </div>
                     </div>
-                <br>
+                <br/>
                 </div>
+
+                <br/>
+                <span>
+                    <button class="btn-add" type="button">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </span>
             </div>    
 
-            <button type="submit" class="btn btn-primary btn-lg">SHARE</button>
             <br/><br/>
-            <button type="submit" class="btn btn-primary">Return To Reservations</button>
+            <button type="submit" class="shareButton btn-lg">SHARE</button>
+            <br/><br/>
+            <button type="submit" class="returnButton">Return To Reservations</button>
         </div>
     </form> 
 </div>
