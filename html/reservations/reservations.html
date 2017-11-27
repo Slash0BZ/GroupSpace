@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Reservations</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link href="reservations.css" rel="stylesheet">
+
+
+  </head>
+
+  <body>
+    <div class="container mt-5 mb-5 mx-auto">
+
+      <h1 class="display-3 mb-5">Welcome NetId,</h1>
+
+      <div class="card-deck">
+
+        <div class="card mb-5 text-center bg-primary" id="add-card">
+            <button type="button" class="w-100 h-100 btn btn-primary btn-lg" href="#" id="add-button">Add Reservation</button>
+        </div>
+
+        <div class="card mb-5 reservation-card">
+          <div class="hover-menu bg-light ">
+            <div class="button-container d-flex flex-column h-100 text-center">
+              <div class="my-auto">
+                <button type="button" class="btn btn-dark btn-lg menu-button  align-self-center mb-3" href="#">Edit</button>
+                <button type="button" class="btn btn-primary btn-lg menu-button align-self-center mb-3" href="#">Share</button>
+                <button type="button" class="btn btn-danger btn-lg menu-button align-self-center mb-3" data-toggle="modal" data-target="#deleteModal">Delete</button>
+              </div>
+
+            </div>
+          </div>
+            <h4 class="card-header text-center">Building and Room #</h4>
+            <ul class="list-group list-group-flush text-center">
+              <li class="list-group-item">Time Date and Duration</li>
+              <li class="list-group-item">White board</li>
+              <li class="list-group-item">Projector</li>
+              <li class="list-group-item">Noise Level</li>
+            </ul>
+        </div>
+
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteModal" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Delete Reservation</h4>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete this reservation?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+    </div> <!-- /container -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+</html>
