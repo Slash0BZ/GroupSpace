@@ -1,7 +1,9 @@
 from flask import Flask, request, abort
+from flask.ext.cors import CORS
 import user
 
 app = Flask(__name__)
+CORS(app, resources=r'/login/*', allow_headers='Content-Type')
 
 @app.route('/')
 def handle_root():
@@ -14,9 +16,9 @@ def handle_login():
 	curUser = user.User(username, password)	
 	status = curUser.login()
 	if (status):
-		return "success", 202
+		return "success"
 	else:
-		return "failure", 401
+		return "failure"
 
 
 if __name__ == '__main__':

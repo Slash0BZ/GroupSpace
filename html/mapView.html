@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvy9FNiSYaLaVbrEQ7a2HMRiDz-EaKi2I&libraries=places&callback=initMap"
+    async defer></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="./util.js"></script>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+		#wrapper {
+			position: relative;
+        	height: 100%;
+			width: 100%;
+		}
+		#map {
+        	height: 100%;
+			width: 100%;
+		}
+		#over_map {
+			position: absolute; top: 10px; left: 10px; z-index: 99;
+		}
+		.reservation {
+              font-weight: bold;
+              text-transform: uppercase;
+              font-size: 20px;
+              margin: 0 auto;
+              text-align: left;
+        }
+		.selection {
+              text-align: left;
+              float: left;
+        }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+	<div id="wrapper">
+    	<div id="map"></div>
+		  <div id="over_map" class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h4 class="card-title">Properties</h4>
+          <div class="reservation">
+          <table>
+              <tr>
+                      <td>
+                          <div class="selection">
+                              <div class="form-group">
+                                  <div class='input-group date' id='datetimepicker1'>
+                                      <input type='text' class="form-control" />
+                                      <span class="input-group-addon">
+                                          <span class="glyphicon glyphicon-calendar"></span>
+                                      </span>
+                                  </div>
+                              </div>
+                              <script type="text/javascript">
+                              	  var params = getRequests();
+                              	  var t = new Date(parseInt(params["time"]));
+                                  $(function () {
+                                      $('#datetimepicker1').datetimepicker({
+                                      	  defaultDate: t,
+                                          showClear: true,
+                                          showClose: true,
+                                          stepping: 15
+                                      });
+                                  });
+                              </script>
+                          </div>
+                      </td>
+              </tr>
+              <tr>
+                  <td>
+                      <div class="selection">
+                          <div class="form-group">
+                              <select class="form-control" id="duration">
+                                  <option>30 minutes</option>
+                                  <option>1 hour</option>
+                                  <option>2 hours</option>
+                                  <option>3 hours</option>
+                              </select>
+                          </div>
+                      </div>
+                      <script type="text/javascript">
+
+                      </script>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <div class="selection">
+                          <div class="form-group">
+                              <select class="form-control" id="num-in-group">
+                                <option>1 person</option>
+                                  <option>2 people</option>
+                                  <option>3 people</option>
+                                  <option>4 people</option>
+                                  <option>5 people</option>
+                                  <option>6 people</option>
+                                  <option>7 people</option>
+                                  <option>8 people</option>
+                                  <option>More than 9 people</option>
+                              </select>
+                          </div>
+                      </div>
+                       <script type="text/javascript">
+
+                      </script>
+                  </td>
+              </tr>
+              <tr>
+                      <td>
+                          <div class="selection">
+                              <div class="form-group">
+                              	    <input type="checkbox" id="equipment-tv" value="equipment-tv">
+    								<label>TV</label>
+    								<br>
+                              	    <input type="checkbox" id="equipment-projector" value="equipment-projector">
+    								<label>Projector</label>    
+    								<br>			
+    								<input type="checkbox" id="equipment-whiteboard" value="equipment-whiteboard">
+    								<label>Whiteboard</label>
+    								<br>
+                              </div>
+                          </div>
+                        <script type="text/javascript">
+
+                      </script>                         
+                      </td>
+                  </tr>
+                  <tr>
+                      <td><label for="noise-level">Noise Level</label><br>
+                      <input id="noise-level" data-slider-id='noise-slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="10"/>
+                      </td>
+                  </tr>
+          </table>
+      </div>
+      		<button class="btn-floating" onclick="showValues();">Show Values</button>
+          <button class="btn-floating btn-lg" onclick="createPlaceMarkers();">button</button>
+        </div>
+      </div>
+		</div>
+	</div>
+  <script>
+
+   var map;
+   var infowindow;
+   var campusLoc = {
+   	lat: 40.109,
+   	lng: -88.227
+   };
+
+   function initMap() {
+   	map = new google.maps.Map(document.getElementById('map'), {
+   		center: campusLoc,
+   		zoom: 16
+   	});
+   	infowindow = new google.maps.InfoWindow();
+   }
+
+   function createMarker(place) {
+   	var placeLoc = place.geometry.location;
+   	var marker = new google.maps.Marker({
+   		map: map,
+   		position: place.geometry.location,
+   		label: {
+   			color: 'black',
+   			fontWeight: 'bold',
+   			text: place.name
+   		},
+   	});
+   	google.maps.event.addListener(marker, 'click', function() {
+   		infowindow.setContent(place.name + "<br><button type='button' class='btn btn-success'>Select</button>");
+   		infowindow.open(map, this);
+   	});
+   }
+   var places = ["Grainger Library", "Undergraduate Library", "Main Library"];
+
+   function createPlaceMarkers(inputs) {
+   	inputs = places;
+   	var service = new google.maps.places.PlacesService(map);
+   	for (var i = 0; i < inputs.length; i++) {
+   		service.nearbySearch({
+   			location: campusLoc,
+   			radius: 1000,
+   			keyword: inputs[i]
+   		}, searchCallback);
+   	}
+   }
+
+   function searchCallback(results, status) {
+   	if (status == google.maps.places.PlacesServiceStatus.OK) {
+   		for (var i = 0; i < 1; i++) {
+   			createMarker(results[i]);
+   		}
+   	}
+   }
+
+   function initializeValues() {
+	var params = getRequests();
+   	$(function() {
+   		$("#duration").val(params["duration"]);
+   	});
+   	$(function() {
+   		$("#num-in-group").val(params["person"]);
+   	});
+   	$('#noise-level').slider({
+    	min: 0,
+    	max: 20,
+    	step: 1,
+    	orientation: 'horizontal',
+    	value: parseInt(params["noise"]),
+    	selection: 'before',
+    	tooltip: 'show'
+	})
+   	$(function() {
+   		var equips = params["equip"];
+   		if (equips.includes("tv")) {
+   			document.getElementById("equipment-tv").checked = true;
+   		}
+   		if (equips.includes("whiteboard")) {
+   			document.getElementById("equipment-whiteboard").checked = true;
+   		}
+   		if (equips.includes("Projector")) {
+   			document.getElementById("equipment-projector").checked = true;
+   		}
+   	});
+   }
+   initializeValues();
+    </script>
+  </body>
+</html>

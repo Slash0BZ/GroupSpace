@@ -83,7 +83,7 @@
                           <div class="selection">
                               <div class="form-group">
                                   <div class='input-group date' id='datetimepicker1'>
-                                      <input type='text' class="form-control" />
+                                      <input type='text' class="form-control" id="time"/>
                                       <span class="input-group-addon">
                                           <span class="glyphicon glyphicon-calendar"></span>
                                       </span>
@@ -187,9 +187,24 @@
               </tbody>
               <tr>
                   <td colspan="2">
-                    <input type="submit" class="btn btn-default" value="Search">
+                    <input type="submit" class="btn btn-default" value="Search" onclick="sendValuesToMap();">
                   </td>
               </tr>
           </table>
       </div>
+      <script type="text/javascript">
+        function sendValuesToMap(){
+          var time = $('#datetimepicker1').data("DateTimePicker").date();
+          var duration = document.getElementById("duration").value;
+          var person = document.getElementById("num-in-group").value;
+          var equip = document.getElementById("equipment-choices").value;
+          var noise = document.getElementById("noise-level").value;
+          window.location = "http://groupspaceuiuc.com/mapView.html" + 
+                            "?time=" + time + 
+                            "&duration=" + duration + 
+                            "&person=" + person + 
+                            "&equip=" + "equip:" + equip + 
+                            "&noise=" + noise;
+        }
+      </script>
   </body>
