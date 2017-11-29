@@ -8,6 +8,8 @@ import json
 app = Flask(__name__)
 CORS(app, resources=r'/login/*', allow_headers='Content-Type')
 CORS(app, resources=r'/getRoom/*', allow_headers='Content-Type')
+CORS(app, resources=r'/queryRoom/*', allow_headers='Content-Type')
+CORS(app, resources=r'/addTransaction/*', allow_headers='Content-Type')
 
 @app.route('/')
 def handle_root():
@@ -42,6 +44,29 @@ def handle_getRoom():
 		cur["position"] = entry[7]
 		output.append(cur)
 	return json.dumps(output)
+
+@app.route('/queryRoom', methods = ['GET', 'POST'])
+def handle_queryRoom():
+	rid = request.args.get("rid")
+	db = database.Database()
+	result = db.queryRoomSpecs(rid)
+	output = {}
+	output["rid"] = result[0][0]
+	output["roomname"] = result[0][1]
+	output["occupancy"] = result[0][3]
+	output["equip"] = result[0][4]
+	output["noise"] = result[0][5]
+	return json.dumps(output)
+
+@app.route('/addTransaction', methods = ['GET', 'POST'])
+def handle_addTransaction():
+	username = request.args.get("username")
+	time = request.args.get("time")
+	duration = request.args.get("duration")
+	rid = request.args.get("rid")
+	db = database.Database()
+	db.addTransaction(username, time, duration, rid)
+	return "Success"
 	
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=False)

@@ -34,3 +34,20 @@ class Database:
 			ret.append(c)
 		cursor.close()
 		return ret
+	
+	def queryRoomSpecs(self, rid):
+		queryString = "SELECT * FROM room WHERE rid=" + str(rid)
+		cursor = self.connection.cursor()
+		cursor.execute(queryString)
+		ret = []
+		for c in cursor:
+			ret.append(c)
+		cursor.close()
+		return ret
+
+	def addTransaction(self, username, time, duration, rid):
+		command = "INSERT INTO transaction (uid, username, time, duration, rid, roomname, people) VALUES (0, '" + username + "', '" + time + "', '" + duration + "', '" + rid + "', 'none', 'none')"
+		cursor = self.connection.cursor()
+		cursor.execute(command)
+		self.connection.commit()
+

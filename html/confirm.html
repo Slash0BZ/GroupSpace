@@ -1,0 +1,168 @@
+<!-- Page for sharing room reservation confirmation info with group members -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Share Reservation</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="./util.js"></script>
+        <style>
+        .navbar
+        {
+            min-height: 4em;
+            background-color: rgb(52,58,64);
+            border-radius: 0px;
+        }
+
+        .navbar-right {
+            margin-right: 0;
+        }
+
+        .navbar-brand
+        {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            text-align: center;
+        }
+
+        #title
+        {
+            color: white;
+            margin: 0 auto;
+            font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .page-title {
+            font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+            font-weight: bold;
+        }
+
+        .center {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .btn-remove {
+            border: none;
+        }
+
+        .btn-add {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            padding: 10px 10px 10px 10px;
+            border-radius: 50%;
+            background-color: rgb(52,58,64);
+        }
+
+        .shareButton {
+            border-radius: 10px;
+        }
+        .returnButton {
+            border-radius: 5px;
+        }
+
+        .entry:not(:first-of-type) {
+            margin-top: 10px;
+        }
+
+        .glyphicon-remove {
+            font-size: 10px;
+        }
+
+        .glyphicon-plus {
+            font-size: 18px;
+            color: white;
+        }
+
+        .fa-power-off {
+            font-size: 20px;
+            color: white;
+            padding-top: 15px;
+        }
+
+        #footer {
+          position: absolute;
+          bottom: 5px;
+          color: gray;
+          width: 100%;
+          text-align: center;
+        }
+        </style>
+    </head>
+<body>
+<nav class="navbar navbar-light bg-light p-2">
+    <div class="navbar-brand h1" id="title"><a href="index.html" style="text-decoration:none; color:white">GroupSpace</a></div>
+    <div class="navbar-collapse collapse">
+        <ul class="navbar navbar-nav navbar-right">
+            <li>
+                <a href="https://www.gmail.com">
+                    <span class="fa fa-power-off"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <br/><br/>
+    <h3 class="center page-title">CONFIRM YOUR RESERVATION</h3>
+    <br/><br/>
+    <div class="card" style="text-align:center">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" id="roomname"></li>
+            <li class="list-group-item" id="time"></li>
+            <li class="list-group-item" id="duration"></li>
+            <li class="list-group-item" id="person"></li>
+            <li class="list-group-item" id="noise"></li>
+            <li class="list-group-item" id="equip"></li>
+        </ul>
+        <button class='btn btn-primary' onclick="reserve();">Reserve</button>
+    </div>
+    <script>
+        var params = getRequests()
+        var rid = params["rid"];
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "http://groupspaceuiuc.com:5000/queryRoom" + 
+                          "?rid=" + rid,
+                          false);
+        xhttp.send(null);
+        var roomSpecs = JSON.parse(xhttp.responseText);
+        document.getElementById("roomname").innerHTML = roomSpecs.roomname;
+        document.getElementById("time").innerHTML = params["time"];
+        document.getElementById("duration").innerHTML = params["duration"];
+        document.getElementById("person").innerHTML = "Max Occupancy: " + roomSpecs.occupancy;
+        document.getElementById("noise").innerHTML = "Noise Level: " + roomSpecs.noise + "/10";
+        var equip = "";
+        if (roomSpecs.equip.includes("0")){
+            equip += "Monitor ";
+        }
+        if (roomSpecs.equip.includes("1")){
+            equip += "WhiteBoard";
+        }
+        document.getElementById("equip").innerHTML = equip;
+
+        function reserve(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://groupspaceuiuc.com:5000/addTransaction" + 
+                              "?username=" + getUserName() + 
+                              "&time=" + document.getElementById("time").innerHTML + 
+                              "&duration=" + document.getElementById("duration").innerHTML + 
+                              "&rid=" + params["rid"],
+                                false);
+            xhttp.send(null);
+            window.location = "http://groupspaceuiuc.com/index.html";
+        }
+    </script>
+</div>
+  <footer id="footer">
+    <small>© Copyright MAAGIX 2017</small>
+  </footer>
+</body>
+</html>

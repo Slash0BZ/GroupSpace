@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <!-- Old Google API position
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvy9FNiSYaLaVbrEQ7a2HMRiDz-EaKi2I&libraries=places&callback=initMap"
     async defer></script>
+    -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -314,7 +315,10 @@
                       "&equip=" + equip + 
                       "&noise=" + noise;
    }
+   //google.maps.event.addDomListener(window, 'load', initMap);
    initializeValues();
     </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvy9FNiSYaLaVbrEQ7a2HMRiDz-EaKi2I&libraries=places&callback=initMap"
+        async defer></script>
   </body>
 </html>

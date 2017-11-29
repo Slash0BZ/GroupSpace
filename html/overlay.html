@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
     <script src="./util.js"></script>
@@ -246,7 +246,7 @@
         document.getElementById("duration").innerHTML = params["duration"];
         document.getElementById("person").innerHTML = params["person"];
         document.getElementById("equip").innerHTML = params["equip"] == "equip:" ? "No Equipment Requested" : params["equip"];
-        document.getElementById("noise").innerHTML = "Noise Level: " + params["noise"] + "/20";
+        document.getElementById("noise").innerHTML = "Noise Level: " + params["noise"] + "/10";
         //Only for demo purposes. 
         var buttonString = ""
         if (params["place"].includes("Grainger")){
@@ -263,6 +263,12 @@
       }
 
       function popConfirmation(rid){
+        var params = getRequests();
+        window.location = "http://groupspaceuiuc.com/confirm.html" +
+                          "?rid=" + rid + 
+                          "&time=" + params["time"] + 
+                          "&duration=" + params["duration"] + 
+                          "&person=" + params["person"];
       }
 
     </script>
