@@ -41,7 +41,7 @@ function eraseCookieFromAllPaths(name) {
 
 function logout(){
     eraseCookieFromAllPaths("username");
-    //window.location = "http://groupspaceuiuc.com/index.html";
+    window.location = "http://groupspaceuiuc.com/index.html";
  }
 
 function getRequests() {
@@ -81,4 +81,15 @@ function getLidFromName(name){
     if (name.includes("Health")){
         return "4";
     }
+}
+
+function getEquipNameFromString(s){
+    var equip = "";
+    if (s.includes("0")){
+        equip += "Monitor ";
+    }
+    if (s.includes("1")){
+        equip += "WhiteBoard";
+    }
+    return equip;
 }

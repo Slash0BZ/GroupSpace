@@ -161,15 +161,15 @@
                       <div class="selection">
                           <div class="form-group">
                               <select class="form-control" id="num-in-group">
-                                <option>1 person</option>
-                                  <option>2 people</option>
-                                  <option>3 people</option>
-                                  <option>4 people</option>
-                                  <option>5 people</option>
-                                  <option>6 people</option>
-                                  <option>7 people</option>
-                                  <option>8 people</option>
-                                  <option>More than 9 people</option>
+                                <option value="1">1 person</option>
+                                <option value="2">2 people</option>
+                                <option value="3">3 people</option>
+                                <option value="4">4 people</option>
+                                <option value="5">5 people</option>
+                                <option value="6">6 people</option>
+                                <option value="7">7 people</option>
+                                <option value="8">8 people</option>
+                                <option value="9">More than 9 people</option>
                               </select>
                           </div>
                       </div>
@@ -182,15 +182,12 @@
                       <td>
                           <div class="selection">
                               <div class="form-group">
-                              	    <input type="checkbox" id="equipment-tv" value="equipment-tv">
-    								<label>TV</label>
+                              	    <input type="checkbox" id="equipment-monitor" value="equipment-monitor">
+    								<label>Monitor</label>
     								<br>
-                              	    <input type="checkbox" id="equipment-projector" value="equipment-projector">
-    								<label>Projector</label>    
+                              	    <input type="checkbox" id="equipment-whiteboard" value="equipment-whiteboard">
+    								<label>Whiteboard</label>    
     								<br>			
-    								<input type="checkbox" id="equipment-whiteboard" value="equipment-whiteboard">
-    								<label>Whiteboard</label>
-    								<br>
                               </div>
                           </div>
                         <script type="text/javascript">
@@ -290,14 +287,11 @@
 	})
    	$(function() {
    		var equips = params["equip"];
-   		if (equips.includes("tv")) {
-   			document.getElementById("equipment-tv").checked = true;
-   		}
-   		if (equips.includes("whiteboard")) {
+   		if (equips.includes("Whiteboard")) {
    			document.getElementById("equipment-whiteboard").checked = true;
-   		}
-   		if (equips.includes("Projector")) {
-   			document.getElementById("equipment-projector").checked = true;
+           }
+        if (equips.includes("Monitor")) {
+   			document.getElementById("equipment-monitor").checked = true;
    		}
    	});
    }

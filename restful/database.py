@@ -51,3 +51,13 @@ class Database:
 		cursor.execute(command)
 		self.connection.commit()
 
+	def queryTransaction(self, username):
+		queryString = "SELECT * FROM transaction WHERE username='" + username + "'"
+		print queryString
+		cursor = self.connection.cursor()
+		cursor.execute(queryString)
+		ret = []
+		for c in cursor:
+			ret.append(c)
+		cursor.close()
+		return ret
