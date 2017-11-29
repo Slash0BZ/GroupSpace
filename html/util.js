@@ -14,12 +14,23 @@ function getCookies(cname) {
     return "";
 }
 
+function getUserName(){
+    return getCookies("username");
+}
+
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires="+d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
+
+function logout(){
+    var cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++)
+      deleteCookie(cookies[i].split("=")[0]);
+    window.location = "http://groupspaceuiuc.com/index.html";
+ }
 
 function getRequests() {
     var s1 = location.search.substring(1, location.search.length).split('&'),
@@ -30,3 +41,15 @@ function getRequests() {
     }
     return r;
 };
+function getTranditionalPlaceName(originalName) {
+    if (originalName.includes("Grainger")){
+        return "Grainger Library";
+    }
+    if (originalName.includes("Health")){
+        return "SSHEL Library";
+    }
+    if (originalName.includes("Funk")){
+        return "Funk ACES Library";
+    }
+    return originalName;
+}

@@ -2,6 +2,7 @@ from flask import Flask, request, abort
 from flask.ext.cors import CORS
 import user
 import utils
+import database
 
 app = Flask(__name__)
 CORS(app, resources=r'/login/*', allow_headers='Content-Type')
@@ -35,6 +36,7 @@ def handle_getRoom():
 	db = database.Database()
 	result = db.queryRoomBySpecs(equipments, noise, people)
 	print result
+	return "AAA"
 	
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=False)
