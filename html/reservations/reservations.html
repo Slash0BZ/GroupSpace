@@ -10,17 +10,38 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
+    <script src="../util.js"></script>
     <!-- Custom CSS -->
     <link href="reservations.css" rel="stylesheet">
-    <script src="../util.js"></script>
 
+    <style>
+      .navbar
+      {
+        min-height: 4em;
+      }
+
+      .navbar-brand
+      {
+        position: absolute;
+        width: 100%;
+        left:0;
+        text-align: center;
+      }
+
+      #title
+      {
+          color: white;
+      }
+    </style>
 
   </head>
 
   <body>
+    <nav class="navbar navbar-header bg-dark p-2">
+        <span class="navbar-brand mb-0 h1" id="title">GroupSpace</span>
+    </nav>
     <div class="container mt-5 mb-5 mx-auto">
-
+      
       <h1 class="display-3 mb-5" id="Welcome-banner"></h1>
 
       <div class="card-deck">
@@ -33,7 +54,6 @@
           <div class="hover-menu bg-light ">
             <div class="button-container d-flex flex-column h-100 text-center">
               <div class="my-auto">
-                <button type="button" class="btn btn-dark btn-lg menu-button  align-self-center mb-3" href="#">Edit</button>
                 <button type="button" class="btn btn-primary btn-lg menu-button align-self-center mb-3" href="#">Share</button>
                 <button type="button" class="btn btn-danger btn-lg menu-button align-self-center mb-3" data-toggle="modal" data-target="#deleteModal">Delete</button>
               </div>
