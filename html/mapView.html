@@ -152,8 +152,7 @@
                   </tr>
           </table>
       </div>
-      		<button class="btn-floating" onclick="showValues();">Show Values</button>
-          <button class="btn-floating btn-lg" onclick="createPlaceMarkers();">button</button>
+          <button class="btn-floating btn-lg" onclick="createPlaceMarkers();">Update</button>
         </div>
       </div>
 		</div>
@@ -173,6 +172,7 @@
    		zoom: 16
    	});
    	infowindow = new google.maps.InfoWindow();
+    createPlaceMarkers();
    }
 
    function createMarker(place) {
@@ -183,30 +183,17 @@
    		label: {
    			color: 'black',
    			fontWeight: 'bold',
-   			text: getTranditionalPlaceName(place.name)
+            text: getTranditionalPlaceName(place.name)
    		},
    	});
    	google.maps.event.addListener(marker, 'click', function() {
-   		infowindow.setContent(place.name + "<br><button type='button' class='btn btn-success'>Select</button>");
+   		infowindow.setContent(getTranditionalPlaceName(place.name) + "<br><button type='button' class='btn btn-success' onclick='gotoOverlay(\"" + place.name + "\");'>Select</button>");
    		infowindow.open(map, this);
    	});
    }
    var places = ["Grainger Library", "Undergraduate Library", "Main Library", "ACES library", "SSHEL Library"];
 
-   function getTranditionalPlaceName(originalName) {
-    if (originalName.includes("Grainger")){
-        return "Grainger Library";
-    }
-    if (originalName.includes("Health")){
-        return "SSHEL Library";
-    }
-    if (originalName.includes("Funk")){
-        return "Funk ACES Library";
-    }
-    return originalName;
-   }
-
-   function createPlaceMarkers(inputs) {
+   function createPlaceMarkers() {
    	inputs = places;
    	var service = new google.maps.places.PlacesService(map);
    	for (var i = 0; i < inputs.length; i++) {
@@ -256,11 +243,21 @@
    		}
    	});
    }
-   function displayLatestSearchResult(){
-       
+   function gotoOverlay(placeName){
+    var time = new Date(parseInt(params["time"]));
+    var duration = params["duration"];
+    var person = params["person"];
+    var equip = params["equip"];
+    var noise = params["noise"];
+    window.location = "http://groupspaceuiuc.com/overlay.html" + 
+                      "?place=" + placeName + 
+                      "&time=" + time.toLocaleDateString("en-US") + " " + time.getHours() + ":" + time.getMinutes() + 
+                      "&person=" + person + 
+                      "&duration=" + duration + 
+                      "&equip=" + equip + 
+                      "&noise=" + noise;
    }
    initializeValues();
-
     </script>
   </body>
 </html>

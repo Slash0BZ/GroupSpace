@@ -3,13 +3,33 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Adding a Custom Overlay</title>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+    <script src="./util.js"></script>
+    <title>Floor View</title>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
         height: 100%;
       }
+      #wrapper {
+			  position: relative;
+       	height: 100%;
+			  width: 100%;
+		  }
+		  #map {
+       	height: 100%;
+			  width: 100%;
+		  }
+		  #over_map {
+			  position: absolute; top: 10px; left: 10px; z-index: 99;
+		  }
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
@@ -45,11 +65,14 @@
             new google.maps.LatLng(40.112596, -88.226280));
 
         // The photograph is courtesy of the U.S. Geological Survey.
-        var srcImage = './resources/grainger_4.jpg';
+        var params = getRequests();
+        var srcImage = "./resources/grainger_" + params["floor"] + ".jpg";
 
         // The custom USGSOverlay object contains the USGS image,
         // the bounds of the image, and a reference to the map.
-        overlay = new USGSOverlay(bounds, srcImage, curmap);
+        if (!params["floor"] == ""){
+          overlay = new USGSOverlay(bounds, srcImage, curmap);
+        }
         createMarkersForRooms(curmap);
 
       }
@@ -126,21 +149,64 @@
       };
 
       google.maps.event.addDomListener(window, 'load', initMap);
+
+      //The function that create a marker for each candidate room.
       function createMarkersForRooms(map){
         var marker = new google.maps.Marker({
           map: map,
           position: map.center
         })
-        /*
+
         google.maps.event.addListener(map, "click", function(e){
           alert(e.latLng.lat() + "," + e.latLng.lng());
         });
-        */
+      }
+      function displayInformation(){
+        var params = getRequests();
+        document.getElementById("place").innerHTML = getTranditionalPlaceName(params["place"]);
+        document.getElementById("time").innerHTML = params["time"];
+        document.getElementById("duration").innerHTML = params["duration"];
+        document.getElementById("person").innerHTML = params["person"];
+        document.getElementById("equip").innerHTML = params["equip"] == "equip:" ? "No Equipment Requested" : params["equip"];
+        document.getElementById("noise").innerHTML = "Noise Level: " + params["noise"] + "/20";
+        //Only for demo purposes. 
+        var buttonString = ""
+        if (params["place"].includes("Grainger")){
+          var floors = ["B", "4"];
+          for (var f in floors){
+            buttonString = buttonString + "<button onclick='gotoFloor(\"" + floors[f] + "\");' class='btn btn-primary'>Floor " + floors[f] + "</button> ";
+          }
+        }
+        document.getElementById("floorButtons").innerHTML = buttonString;
+      }
+
+      function gotoFloor(floor){
+        window.location = window.location.href + "&floor=" + floor;
       }
 
     </script>
   </head>
   <body>
-    <div id="map"></div>
+    <div id="wrapper">
+      <div id="over_map">
+        <div class="card">
+          <div id="info_card" class="card-body">
+              <ul class="list-group list-group-flush">
+                  <li class="list-group-item" id="place"></li>
+                  <li class="list-group-item" id="time"></li>
+                  <li class="list-group-item" id="duration"></li>
+                  <li class="list-group-item" id="person"></li>
+                  <li class="list-group-item" id="equip"></li>
+                  <li class="list-group-item" id="noise"></li>
+                  <li class="list-group-item" id="floorButtons"></li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div id="map"></div>
+    </div>
   </body>
+  <script>
+    displayInformation(); 
+  </script>
 </html>
