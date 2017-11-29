@@ -25,10 +25,22 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+function eraseCookieFromAllPaths(name) {
+    // This function will attempt to remove a cookie from all paths.
+    var pathBits = location.pathname.split('/');
+    var pathCurrent = ' path=';
+
+    // do a simple pathless delete first.
+    document.cookie = name + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT;';
+
+    for (var i = 0; i < pathBits.length; i++) {
+        pathCurrent += ((pathCurrent.substr(-1) != '/') ? '/' : '') + pathBits[i];
+        document.cookie = name + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT;' + pathCurrent + ';';
+    }
+}
+
 function logout(){
-    var cookies = document.cookie.split(";");
-    for (var i = 0; i < cookies.length; i++)
-      deleteCookie(cookies[i].split("=")[0]);
+    eraseCookieFromAllPaths("username");
     window.location = "http://groupspaceuiuc.com/index.html";
  }
 
@@ -69,4 +81,15 @@ function getLidFromName(name){
     if (name.includes("Health")){
         return "4";
     }
+}
+
+function getEquipNameFromString(s){
+    var equip = "";
+    if (s.includes("0")){
+        equip += "Monitor ";
+    }
+    if (s.includes("1")){
+        equip += "WhiteBoard";
+    }
+    return equip;
 }

@@ -10,6 +10,7 @@ CORS(app, resources=r'/login/*', allow_headers='Content-Type')
 CORS(app, resources=r'/getRoom/*', allow_headers='Content-Type')
 CORS(app, resources=r'/queryRoom/*', allow_headers='Content-Type')
 CORS(app, resources=r'/addTransaction/*', allow_headers='Content-Type')
+CORS(app, resources=r'/queryTransaction/*', allow_headers='Content-Type')
 
 @app.route('/')
 def handle_root():
@@ -67,6 +68,20 @@ def handle_addTransaction():
 	db = database.Database()
 	db.addTransaction(username, time, duration, rid)
 	return "Success"
+
+@app.route('/queryTransaction', methods = ['GET', 'POST'])
+def handle_queryTransaction():
+	username = request.args.get("username")
+	db = database.Database()
+	result = db.queryTransaction(username)
+	output = []
+	for entry in result:
+		cur = {}
+		cur["time"] = entry[2]
+		cur["duration"] = entry[3]
+		cur["rid"] = entry[4]
+		output.append(cur)
+	return json.dumps(output)
 	
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=False)

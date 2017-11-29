@@ -139,14 +139,7 @@
         document.getElementById("duration").innerHTML = params["duration"];
         document.getElementById("person").innerHTML = "Max Occupancy: " + roomSpecs.occupancy;
         document.getElementById("noise").innerHTML = "Noise Level: " + roomSpecs.noise + "/10";
-        var equip = "";
-        if (roomSpecs.equip.includes("0")){
-            equip += "Monitor ";
-        }
-        if (roomSpecs.equip.includes("1")){
-            equip += "WhiteBoard";
-        }
-        document.getElementById("equip").innerHTML = equip;
+        document.getElementById("equip").innerHTML = getEquipNameFromString(roomSpecs.equip);
 
         function reserve(){
             var xhttp = new XMLHttpRequest();
