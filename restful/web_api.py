@@ -3,9 +3,11 @@ from flask.ext.cors import CORS
 import user
 import utils
 import database
+import json
 
 app = Flask(__name__)
 CORS(app, resources=r'/login/*', allow_headers='Content-Type')
+CORS(app, resources=r'/getRoom/*', allow_headers='Content-Type')
 
 @app.route('/')
 def handle_root():
@@ -24,19 +26,22 @@ def handle_login():
 
 @app.route('/getRoom', methods = ['GET', 'POST'])
 def handle_getRoom():
-	equipments = request.args.get("equipments")
 	noise = request.args.get("noise")
 	people = request.args.get("people")
-	if "monitor" in equipments:
-		equipments = "0"
-	if "whiteboard" in equipments:
-		equipments = "1"
+	library = request.args.get("library")
 	noise = int(noise)
 	poeple = int(people)
+	library = int(library)
 	db = database.Database()
-	result = db.queryRoomBySpecs(equipments, noise, people)
-	print result
-	return "AAA"
+	result = db.queryRoomBySpecs(noise, people, library)
+	output = []
+	for entry in result:
+		cur = {}
+		cur["rid"] = entry[0]
+		cur["name"] = entry[1]
+		cur["position"] = entry[7]
+		output.append(cur)
+	return json.dumps(output)
 	
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=False)

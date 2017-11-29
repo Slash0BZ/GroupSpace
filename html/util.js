@@ -53,3 +53,20 @@ function getTranditionalPlaceName(originalName) {
     }
     return originalName;
 }
+function getLidFromName(name){
+    if (name.includes("Grainger")){
+        return "0";
+    }
+    if (name.includes("Undergraduate")){
+        return "1";
+    }
+    if (name.includes("Funk")){
+        return "2";
+    }
+    if (name.includes("Main")){
+        return "3";
+    }
+    if (name.includes("Health")){
+        return "4";
+    }
+}

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
@@ -59,6 +60,7 @@
           zoom: 20,
           center: {lat: 40.1124622, lng: -88.22688},
         });
+        var infowindow = new google.maps.InfoWindow();
 
         var bounds = new google.maps.LatLngBounds(
             new google.maps.LatLng(40.11228, -88.227436),
@@ -73,7 +75,7 @@
         if (!params["floor"] == ""){
           overlay = new USGSOverlay(bounds, srcImage, curmap);
         }
-        createMarkersForRooms(curmap);
+        createMarkersForRooms(curmap, infowindow);
 
       }
 
@@ -151,15 +153,49 @@
       google.maps.event.addDomListener(window, 'load', initMap);
 
       //The function that create a marker for each candidate room.
-      function createMarkersForRooms(map){
-        var marker = new google.maps.Marker({
-          map: map,
-          position: map.center
-        })
-
+      function createMarkersForRooms(map, infowindow){
+        var params = getRequests();
+        var lid = getLidFromName(params["place"]);
+        var floor = params["floor"];
+        if (typeof floor == "undefined"){
+          return;
+        }
+        var people = params["person"].split(" ");
+        var peopleNum = people[0];
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "http://groupspaceuiuc.com:5000/getRoom" + 
+                          "?noise=" + params["noise"] + 
+                          "&people=" + peopleNum +
+                          "&library=" + lid,
+                          false);
+        xhttp.send(null);
+        var queryResult = JSON.parse(xhttp.responseText);
+        for (var q in queryResult){
+          var name = queryResult[q].name;
+          if (floor == "4" && name.includes("Lower")){
+            continue;
+          }
+          if (floor == "B" && name.includes("Group")){
+            continue;
+          }
+          var position = queryResult[q].position.split(",");
+          var rid = queryResult[q].rid;
+          var lat = parseFloat(position[0]);
+          var lng = parseFloat(position[1]);
+          var marker = new google.maps.Marker({
+            map: map, 
+            position: {lat: lat, lng: lng}
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+   	        infowindow.setContent(name + "<br><button type='button' class='btn btn-success' onclick='popConfirmation(\"" + rid + "\");'>Select</button>");
+   		      infowindow.open(map, this);
+          });
+        }
+        /*
         google.maps.event.addListener(map, "click", function(e){
           alert(e.latLng.lat() + "," + e.latLng.lng());
         });
+        */
       }
       function displayInformation(){
         var params = getRequests();
@@ -184,9 +220,13 @@
         window.location = window.location.href + "&floor=" + floor;
       }
 
+      function popConfirmation(rid){
+      }
+
     </script>
   </head>
   <body>
+
     <div id="wrapper">
       <div id="over_map">
         <div class="card">

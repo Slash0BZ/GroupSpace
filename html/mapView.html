@@ -147,7 +147,7 @@
                   </tr>
                   <tr>
                       <td><label for="noise-level">Noise Level</label><br>
-                      <input id="noise-level" data-slider-id='noise-slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="10"/>
+                      <input id="noise-level" data-slider-id='noise-slider' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5"/>
                       </td>
                   </tr>
           </table>
@@ -223,7 +223,7 @@
    	});
    	$('#noise-level').slider({
     	min: 0,
-    	max: 20,
+    	max: 10,
     	step: 1,
     	orientation: 'horizontal',
     	value: parseInt(params["noise"]),

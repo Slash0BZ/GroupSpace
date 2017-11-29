@@ -25,8 +25,8 @@ class Database:
 		cursor.close()
 		return ret
 
-	def queryRoomBySpecs(self, equip, noise, people):
-		queryString = "SELECT * FROM room WHERE equipments LIKE '%equip%' AND noise BETWEEN " + str(noise - 2) + " AND " + str(noise + 2) + " AND occupancy >= " + people
+	def queryRoomBySpecs(self, noise, people, library):
+		queryString = "SELECT * FROM room WHERE noise BETWEEN " + str(noise - 1) + " AND " + str(noise + 1) + " AND occupancy >= " + str(people) + " AND lid=" + str(library)
 		cursor = self.connection.cursor()
 		cursor.execute(queryString)
 		ret = []
