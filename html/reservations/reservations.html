@@ -11,32 +11,52 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="../util.js"></script>
     <!-- Custom CSS -->
     <link href="reservations.css" rel="stylesheet">
 
     <style>
-        .navbar {
-            min-height: 4em;
-        }
-        
-        .navbar-brand {
-            position: absolute;
-            width: 100%;
-            left: 0;
-            text-align: center;
-        }
-        
-        #title {
-            color: white;
-        }
+      {
+        min-height: 4em;
+      }
+
+      .navbar-brand
+      {
+        left:0;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      #title
+      {
+          color: white;
+      }
+
+      .fa-power-off {
+        color: white;
+        font-size: 20px;
+      }
+
+      .navbar-logo {
+        width: 120px;
+      }
     </style>
 
 </head>
 
-<body>
-    <nav class="navbar navbar-header bg-dark p-2">
-        <span class="navbar-brand mb-0 h1" id="title">GroupSpace</span>
+  <body>
+    <nav class="navbar navbar-light bg-light bg-dark p-2">
+        <ul class="navbar-nav navbar-logo mx-auto">
+            <li>
+            <a class="navbar-brand h1" id="title" href="index.html" style="text-decoration:none;color:white;">GroupSpace</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav pull-sm-right">
+            <li>
+                <a href="javascript:logout()"><span class="fa fa-power-off"></span></a>
+            </li>
+        </ul>
     </nav>
     <div class="container mt-5 mb-5 mx-auto">
 
