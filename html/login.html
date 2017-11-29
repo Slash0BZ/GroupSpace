@@ -11,6 +11,34 @@
     <script src="./util.js"></script>
 
     <style>
+    .navbar
+    {
+        min-height: 4em;
+        background-color: rgb(52,58,64);
+        border-radius: 0px;
+    }
+
+    .navbar-right {
+        margin-right: 0;
+    }
+
+    .navbar-brand
+    {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    #title
+    {
+        color: white;
+        margin: 0 auto;
+        font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+        font-size: 20px;
+    }
+
     .center {
       margin: auto;
       width: 40%;
@@ -21,7 +49,7 @@
       text-align: center;
     }
 
-    .title {
+    #login {
       font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
       font-weight: bold;
       text-align: center;
@@ -38,9 +66,13 @@
 
   </head>
   <body>
+    <nav class="navbar navbar-light bg-light bg-dark p-2">
+        <div class="navbar-brand h1" id="title">GroupSpace</div>
+    </nav>
+
   <div class="center">
     <br/><br/>
-    <h3 class="title">LOGIN</h3>
+    <h3 id="login">LOGIN</h3>
     <br/>
 
     <div class="form-group">
