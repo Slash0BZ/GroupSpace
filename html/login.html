@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title> Hello world! :)</title>
+    <title>Login</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,8 +9,39 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script src="./util.js"></script>
+
+    <style>
+    .center {
+      margin: auto;
+      width: 40%;
+    }
+
+    .center-btn {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .title {
+      font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #footer {
+      position: absolute;
+      bottom: 5px;
+      color: gray;
+      width: 50%;
+      text-align: center;
+    }
+    </style>
+
   </head>
-  <body>
+  <body class="center">
+  <br/><br/>
+  <h3 class="title">LOGIN</h3>
+  <br/>
+
   <div class="form-group">
     <label>NetID</label>
     <input type="text" class="form-control" id="username" placeholder="Enter NetID">
@@ -19,7 +50,14 @@
     <label>Password</label>
     <input type="password" class="form-control" id="password" placeholder="Password">
   </div>
-  <button type="submit" class="btn btn-primary" onclick="login();">Submit</button>
+  <div class="center-btn">
+    <button type="submit" class="btn btn-primary" onclick="login();">Submit</button>
+  </div>
+
+  <footer id="footer">
+    <small>© Copyright MAAGIX 2017</small>
+  </footer>
+
 <script type="text/javascript">
 
   function login(){
