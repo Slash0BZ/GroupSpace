@@ -48,8 +48,6 @@
 
           .navbar-brand
           {
-              position: absolute;
-              width: 100%;
               left: 0;
               text-align: center;
               font-weight: bold;
@@ -68,9 +66,9 @@
               font-size: 20px;
           }
 
-        .ml-auto {
-            margin-right: 5px;
-        }
+          .navbar-logo {
+              width: 120px;
+          }
 
         #footer {
           position: absolute;
@@ -275,10 +273,14 @@
   </head>
   <body>
     <nav class="navbar navbar-light bg-light bg-dark p-2">
-        <a class="navbar-brand h1" id="title" href="index.html" style="text-decoration:none;color:white;">GroupSpace</a>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:logout()"><span class="fa fa-power-off"></span></a>
+        <ul class="navbar-nav navbar-logo mx-auto">
+            <li>
+            <a class="navbar-brand h1" id="title" href="index.html" style="text-decoration:none;color:white;">GroupSpace</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav pull-sm-right">
+            <li>
+                <a href="javascript:logout()"><span class="fa fa-power-off"></span></a>
             </li>
         </ul>
     </nav>
