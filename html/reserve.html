@@ -13,7 +13,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script>
+        function displayShare(selection) {
+            var value = selection.options[selection.selectedIndex].value;
+            if (value == "one") {
+                $("#single-person").show();
+            }
+            else {
+                $("#single-person").hide();
+            }
+        }
+    </script>
 
+      <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+      </script>
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css" />
@@ -107,7 +123,7 @@
         <div class="navbar-collapse collapse">
             <ul class="navbar navbar-nav navbar-right">
                 <li>
-                    <a href="https://www.gmail.com">
+                    <a href="javascript:logout()">
                         <span class="fa fa-power-off"></span>
                     </a>
                 </li>
@@ -171,16 +187,16 @@
                   <td>
                       <div class="selection">
                           <div class="form-group">
-                              <select class="form-control" id="num-in-group">
-                                <option>1 person</option>
-                                  <option>2 people</option>
-                                  <option>3 people</option>
-                                  <option>4 people</option>
-                                  <option>5 people</option>
-                                  <option>6 people</option>
-                                  <option>7 people</option>
-                                  <option>8 people</option>
-                                  <option>More than 9 people</option>
+                              <select class="form-control" id="num-in-group" onchange="displayShare(this)">
+                                <option value="one" selected>1 person</option>
+                                  <option value="two">2 people</option>
+                                  <option value="three">3 people</option>
+                                  <option value="four">4 people</option>
+                                  <option value="five">5 people</option>
+                                  <option value="six">6 people</option>
+                                  <option value="seven">7 people</option>
+                                  <option value="eight">8 people</option>
+                                  <option value="nine">More than 9 people</option>
                               </select>
                           </div>
                       </div>
@@ -231,6 +247,17 @@
                       </td>
                   </tr>
               </tbody>
+              <tr id="single-person">
+                  <td>
+
+                  </td>
+                  <td>
+                      <span class="checkbox">
+                          <label><input type="checkbox" value="">Allow sharing rooms with others
+                              <a href="#" data-toggle="tooltip" title="Allow other single users to study with you in this room" data-placement="top" style="color:red;text-decoration:none;">?</a></label>
+                      </span>
+                  </td>
+              </tr>
               <tr>
                   <td colspan="2">
                     <input type="submit" class="btn btn-lg btn-primary" value="SEARCH" onclick="sendValuesToMap();">
