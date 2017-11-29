@@ -10,6 +10,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="../util.js"></script>
     <!-- Custom CSS -->
     <link href="reservations.css" rel="stylesheet">
@@ -32,13 +33,27 @@
       {
           color: white;
       }
+
+      .fa-power-off {
+        color: white;
+        font-size: 20px;
+      }
+
+      .ml-auto {
+        margin-right: 5px;
+      }
     </style>
 
   </head>
 
   <body>
-    <nav class="navbar navbar-header bg-dark p-2">
-        <span class="navbar-brand mb-0 h1" id="title">GroupSpace</span>
+    <nav class="navbar navbar-light bg-light bg-dark p-2">
+        <a class="navbar-brand h1" id="title" href="index.html" style="text-decoration:none;color:white;">GroupSpace</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:logout()"><span class="fa fa-power-off"></span></a>
+            </li>
+        </ul>
     </nav>
     <div class="container mt-5 mb-5 mx-auto">
       
