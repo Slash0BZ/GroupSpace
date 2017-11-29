@@ -1,7 +1,11 @@
 from flask import Flask, request, abort
+from flask.ext.cors import CORS
 import user
+import utils
+import database
 
 app = Flask(__name__)
+CORS(app, resources=r'/login/*', allow_headers='Content-Type')
 
 @app.route('/')
 def handle_root():
@@ -14,10 +18,25 @@ def handle_login():
 	curUser = user.User(username, password)	
 	status = curUser.login()
 	if (status):
-		return "success", 202
+		return "success"
 	else:
-		return "failure", 401
+		return "failure"
 
-
+@app.route('/getRoom', methods = ['GET', 'POST'])
+def handle_getRoom():
+	equipments = request.args.get("equipments")
+	noise = request.args.get("noise")
+	people = request.args.get("people")
+	if "monitor" in equipments:
+		equipments = "0"
+	if "whiteboard" in equipments:
+		equipments = "1"
+	noise = int(noise)
+	poeple = int(people)
+	db = database.Database()
+	result = db.queryRoomBySpecs(equipments, noise, people)
+	print result
+	return "AAA"
+	
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=False)
