@@ -7,6 +7,36 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
         <style>
+        .navbar
+        {
+            min-height: 4em;
+            background-color: rgb(52,58,64);
+            border-radius: 0px;
+        }
+
+        .navbar-right {
+            margin-right: 0;
+        }
+
+        .navbar-brand
+        {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            text-align: center;
+        }
+
+        #title
+        {
+            color: white;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+            font-weight: bold;
+        }
+
         .center {
             margin: 0 auto;
             text-align: center;
@@ -21,7 +51,8 @@
             height: 40px;
             text-align: center;
             padding: 10px 10px 10px 10px;
-            border-radius: 35px;
+            border-radius: 50%;
+            background-color: rgb(52,58,64);
         }
 
         .shareButton {
@@ -39,8 +70,15 @@
             font-size: 10px;
         }
 
-        .glyphicon-add {
+        .glyphicon-plus {
             font-size: 18px;
+            color: white;
+        }
+
+        .glyphicon-off {
+            font-size: 20px;
+            color: white;
+            padding-top: 15px;
         }
         </style>
 
@@ -70,15 +108,27 @@
         </script>
     </head>
 <body>
+<nav class="navbar navbar-light bg-light p-2">
+    <div class="navbar-brand h1" id="title"><a href="index.html" style="text-decoration:none; color:white">GroupSpace</a></div>
+    <div class="navbar-collapse collapse">
+        <ul class="navbar navbar-nav navbar-right">
+            <li>
+                <a href="https://www.gmail.com">
+                    <span class="glyphicon glyphicon-off"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <div class="container">
     <br/><br/>
-    <h3 class="center">SHARE YOUR RESERVATION</h3>
+    <h3 class="center page-title">SHARE YOUR RESERVATION</h3>
     <br/><br/>
 
     <form id="form_submit" action="" method="POST">
         <div class="form-group center">
             <div class="control-group" id="fields">
-                <div class="controls center"> 
+                <div class="controls center">
                     <div class="d1">
                         <div class="entry input-group col-xs-6 center">
                             <input class="form-control" name="fields[]" type="text" placeholder="netid@illinois.edu" />
@@ -111,12 +161,12 @@
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </span>
-            </div>    
+            </div>
 
             <br/><br/>
-            <button type="submit" class="shareButton btn-lg">SHARE</button>
+            <button type="submit" class="shareButton btn-lg btn-primary">SHARE</button>
             <br/><br/>
-            <button type="submit" class="returnButton">Return To Reservations</button>
+            <button type="submit" class="returnButton btn-default">Return To Reservations</button>
         </div>
     </form> 
 </div>
