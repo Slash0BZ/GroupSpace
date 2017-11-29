@@ -7,9 +7,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+<<<<<<< HEAD
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+=======
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+>>>>>>> f0b12125dcdf3e0f5f24c323086083baa4d2c76b
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
     <script src="./util.js"></script>
@@ -268,7 +273,10 @@
     </script>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light bg-dark p-2">
+<<<<<<< HEAD
+
+=======
+      <nav class="navbar navbar-light bg-light bg-dark p-2">
         <a class="navbar-brand h1" id="title" href="index.html" style="text-decoration:none;color:white;">GroupSpace</a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -276,6 +284,7 @@
             </li>
         </ul>
     </nav>
+>>>>>>> f0b12125dcdf3e0f5f24c323086083baa4d2c76b
     <div id="wrapper">
       <div id="over_map">
         <div class="card">

@@ -31,3 +31,11 @@
 .menu-button{
   min-width: 10em;
 }
+
+#footer {
+  position: absolute;
+  bottom: 5px;
+  color: gray;
+  width: 100%;
+  text-align: center;
+}

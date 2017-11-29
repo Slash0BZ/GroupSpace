@@ -2,7 +2,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Share Reservation</title>
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
@@ -30,6 +34,9 @@
         {
             color: white;
             margin: 0 auto;
+            font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+            font-size: 20px;
+            font-weight: bold;
         }
 
         .page-title {
@@ -75,10 +82,18 @@
             color: white;
         }
 
-        .glyphicon-off {
+        .fa-power-off {
             font-size: 20px;
             color: white;
             padding-top: 15px;
+        }
+
+        #footer {
+          position: absolute;
+          bottom: 5px;
+          color: gray;
+          width: 100%;
+          text-align: center;
         }
         </style>
 
@@ -114,7 +129,7 @@
         <ul class="navbar navbar-nav navbar-right">
             <li>
                 <a href="https://www.gmail.com">
-                    <span class="glyphicon glyphicon-off"></span>
+                    <span class="fa fa-power-off"></span>
                 </a>
             </li>
         </ul>
@@ -170,5 +185,8 @@
         </div>
     </form> 
 </div>
+  <footer id="footer">
+    <small>© Copyright MAAGIX 2017</small>
+  </footer>
 </body>
 </html>

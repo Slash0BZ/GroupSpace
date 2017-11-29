@@ -14,6 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
@@ -75,17 +76,28 @@
           {
               color: white;
               margin: 0 auto;
+              font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+              font-size: 20px;
           }
 
-          .glyphicon-off {
+          .fa-power-off {
               color: white;
               font-size: 20px;
-              padding-top: 15px;
+              margin-top: 15px;
           }
 
           .navbar-right {
               margin-right: 0;
           }
+            
+          #footer {
+            position: absolute;
+            bottom: 5px;
+            color: gray;
+            width: 100%;
+            text-align: center;
+          }
+
       </style>
 
   </head>
@@ -96,7 +108,7 @@
             <ul class="navbar navbar-nav navbar-right">
                 <li>
                     <a href="https://www.gmail.com">
-                        <span class="glyphicon glyphicon-off"></span>
+                        <span class="fa fa-power-off"></span>
                     </a>
                 </li>
             </ul>
@@ -226,6 +238,11 @@
               </tr>
           </table>
       </div>
+
+    <footer id="footer">
+      <small>© Copyright MAAGIX 2017</small>
+    </footer>
+
       <script type="text/javascript">
         function sendValuesToMap(){
           var time = $('#datetimepicker1').data("DateTimePicker").date();
