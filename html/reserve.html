@@ -274,7 +274,7 @@
           var time = $('#datetimepicker1').data("DateTimePicker").date();
           var duration = document.getElementById("duration").value;
           var person = document.getElementById("num-in-group").value;
-          var equip = document.getElementById("equipment-choices").value;
+          var equip = $.map($('#equipment-choices :selected'), function(e) { return $(e).text(); } );
           var noise = document.getElementById("noise-level").value;
           window.location = "http://groupspaceuiuc.com/mapView.html" + 
                             "?time=" + time + 
