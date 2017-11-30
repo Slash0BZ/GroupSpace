@@ -11,6 +11,7 @@ CORS(app, resources=r'/getRoom/*', allow_headers='Content-Type')
 CORS(app, resources=r'/queryRoom/*', allow_headers='Content-Type')
 CORS(app, resources=r'/addTransaction/*', allow_headers='Content-Type')
 CORS(app, resources=r'/queryTransaction/*', allow_headers='Content-Type')
+CORS(app, resources=r'/deleteTransaction/*', allow_headers='Content-Type')
 
 @app.route('/')
 def handle_root():
@@ -82,6 +83,14 @@ def handle_queryTransaction():
 		cur["rid"] = entry[4]
 		output.append(cur)
 	return json.dumps(output)
+
+@app.route('/deleteTransaction', methods = ['GET', 'POST'])
+def handle_deletion():
+	username = request.args.get("username")
+	time = request.args.get("time")
+	db = database.Database()
+	db.deleteTransaction(username, time)
+	return "Success"
 	
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=False)

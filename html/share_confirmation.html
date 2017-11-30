@@ -139,8 +139,6 @@
     <br/><br/>
     <h3 class="center page-title">SHARE YOUR RESERVATION</h3>
     <br/><br/>
-
-    <form id="form_submit" action="" method="POST">
         <div class="form-group center">
             <div class="control-group" id="fields">
                 <div class="controls center">
@@ -179,11 +177,16 @@
             </div>
 
             <br/><br/>
-            <button type="submit" class="shareButton btn-lg btn-primary">SHARE</button>
+            <button type="submit" class="shareButton btn-lg btn-primary" onclick="reloc();">SHARE</button>
             <br/><br/>
-            <button type="submit" class="returnButton btn-default">Return To Reservations</button>
+            <a class="returnButton btn-default" href="index.html">Return To Reservations</a>
+            <script>
+                function reloc(){
+                    alert("Success. You will be re-directed to home page.");
+                    window.location.replace("http://groupspaceuiuc.com/index.html");
+                }
+            </script>
         </div>
-    </form> 
 </div>
   <footer id="footer">
     <small>© Copyright MAAGIX 2017</small>

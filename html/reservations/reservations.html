@@ -17,10 +17,6 @@
     <link href="reservations.css" rel="stylesheet">
 
     <style>
-      {
-        min-height: 4em;
-      }
-
       .navbar-brand
       {
         left:0;
@@ -68,7 +64,7 @@
                 <button type="button" class="w-100 h-100 btn btn-primary btn-lg" href="#" onclick="gotoReserve();" id="add-button">Add Reservation</button>
             </div>
 
-
+            
 
             <!-- Delete Modal -->
             <div class="modal fade" id="deleteModal" role="dialog">
@@ -83,7 +79,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="executeDeletion();">Delete</button>
                         </div>
                     </div>
 
@@ -98,58 +94,94 @@
         </footer>
 
         <script type="text/javascript">
-            if (typeof getUserName() == "undefined" || getUserName() == ""){
-              window.location="http://groupspaceuiuc.com/index.html";
+            if (typeof getUserName() == "undefined" || getUserName() == "") {
+                window.location = "http://groupspaceuiuc.com/index.html";
             }
             document.getElementById("Welcome-banner").innerHTML = "Welcome, " + getCookies("username");
-
+            
             function gotoReserve() {
                 window.location = "http://groupspaceuiuc.com/reserve.html";
             }
-
-            var card_text = "<div class='card mb-5 reservation-card'><div class='hover-menu bg-light '><div class='button-container d-flex flex-column h-100 text-center'><div class='my-auto'><button type='button' class='btn btn-primary btn-lg menu-button align-self-center mb-3' href='#'>Share</button><button type='button' class='btn btn-danger btn-lg menu-button align-self-center mb-3' data-toggle='modal' data-target='#deleteModal'>Delete</button></div></div></div><h4 class='card-header text-center'>"
-            var card_text_before_room = "</h4><ul class='list-group list-group-flush text-center'><li class='list-group-item'>"
-            var card_text_before_time = "</li><li class='list-group-item'>"
-            var card_text_before_duration = "</li><li class='list-group-item'>"
-            var card_text_before_occupancy = "</li><li class='list-group-item'>"
-            var card_text_before_equip = "</li><li class='list-group-item'>"
-            var card_text_before_noise = "</li></ul></div>"
             
-            function addCards(){
-              var xhttp = new XMLHttpRequest();
-              xhttp.open("GET", "http://groupspaceuiuc.com:5000/queryTransaction" + 
-                          "?username=" + getUserName(),
-                          false);
-              xhttp.send(null);
-              var queryResult = JSON.parse(xhttp.responseText);
-              for (var q in queryResult){
-                var time = queryResult[q].time;
-                var formalTime = new Date(time);
-                var now = new Date();
-                if (formalTime.getTime() < now.getTime()){
-                  continue;
+            var card_text = "<div class='card mb-5 reservation-card' id='";
+            var card_text_before_id = "'><div class='hover-menu bg-light '><div class='button-container d-flex flex-column h-100 text-center'><div class='my-auto'><button type='button' class='btn btn-primary btn-lg menu-button align-self-center mb-3' onclick=\"share('";
+            var card_text_before_second_id = "');\">Share</button><button type='button' class='btn btn-danger btn-lg menu-button align-self-center mb-3' data-toggle='modal' data-target='#deleteModal' onclick=\"register('";
+            var card_text_before_third_id = "');\">Delete</button></div></div></div><h4 class='card-header text-center roomname'>";
+            var card_text_before_room = "</h4><ul class='list-group list-group-flush text-center'><li class='list-group-item time'>";
+            var card_text_before_time = "</li><li class='list-group-item'>";
+            var card_text_before_duration = "</li><li class='list-group-item'>";
+            var card_text_before_occupancy = "</li><li class='list-group-item'>";
+            var card_text_before_equip = "</li><li class='list-group-item'>";
+            var card_text_before_noise = "</li></ul></div>";
+            
+            function addCards() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "http://groupspaceuiuc.com:5000/queryTransaction" +
+                    "?username=" + getUserName(),
+                    false);
+                xhttp.send(null);
+                var queryResult = JSON.parse(xhttp.responseText);
+                for (var q in queryResult) {
+                    var time = queryResult[q].time;
+                    var formalTime = new Date(time);
+                    var now = new Date();
+                    if (formalTime.getTime() < now.getTime()) {
+                        continue;
+                    }
+                    var duration = queryResult[q].duration;
+                    var xhttp2 = new XMLHttpRequest();
+                    xhttp2.open("GET", "http://groupspaceuiuc.com:5000/queryRoom" +
+                        "?rid=" + queryResult[q].rid,
+                        false);
+                    xhttp2.send(null);
+                    var roomSpecs = JSON.parse(xhttp2.responseText);
+                    var roomname = roomSpecs.roomname;
+                    var equipString = roomSpecs.equip;
+                    var equip = getEquipNameFromString(equipString);
+                    var noise = "Noise: " + roomSpecs.noise + "/10";
+                    var occupancy = "Max Occupancy: " + roomSpecs.occupancy + " people";
+                    var id = btoa(roomname + time);
+                    var newCardHtml = card_text + 
+                        id + card_text_before_id +
+                        id + card_text_before_second_id +
+                        id + card_text_before_third_id +
+                        roomname + card_text_before_room +
+                        time + card_text_before_time +
+                        duration + card_text_before_duration +
+                        occupancy + card_text_before_occupancy +
+                        equip + card_text_before_equip +
+                        noise + card_text_before_noise;
+                    console.log(newCardHtml);
+                    document.getElementById("card-deck-container").innerHTML += newCardHtml;
                 }
-                var duration = queryResult[q].duration;
-                var xhttp2 = new XMLHttpRequest();
-                xhttp2.open("GET", "http://groupspaceuiuc.com:5000/queryRoom" + 
-                            "?rid=" + queryResult[q].rid,
-                            false);
-                xhttp2.send(null);
-                var roomSpecs = JSON.parse(xhttp2.responseText);
-                var roomname = roomSpecs.roomname;
-                var equipString = roomSpecs.equip;
-                var equip = getEquipNameFromString(equipString);
-                var noise = "Noise: " + roomSpecs.noise + "/10";
-                var occupancy = roomSpecs.occupancy + " people";
-                document.getElementById("card-deck-container").innerHTML += card_text 
-                                                                         + roomname + card_text_before_room
-                                                                         + time + card_text_before_time
-                                                                         + duration + card_text_before_duration
-                                                                         + occupancy + card_text_before_occupancy
-                                                                         + equip + card_text_before_equip
-                                                                         + noise + card_text_before_noise;
-              }
             }
+            
+            function register(input_id) {
+                var curCard = document.getElementById(input_id);
+                setCookie("room", curCard.getElementsByClassName("roomname")[0].innerHTML, 1);
+                setCookie("time", curCard.getElementsByClassName("time")[0].innerHTML, 1);
+            }
+
+            function executeDeletion(){
+                var username = getCookies("username");
+                var room = getCookies("room");
+                var time = getCookies("time");
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "http://groupspaceuiuc.com:5000/deleteTransaction" +
+                    "?username=" + username + 
+                    "&time=" + time,
+                    false);
+                xhttp.send(null);
+                location.reload();
+            }
+
+            function share(input_id){
+                var curCard = document.getElementById(input_id);
+                setCookie("room", curCard.getElementsByClassName("roomname")[0].innerHTML, 1);
+                setCookie("time", curCard.getElementsByClassName("time")[0].innerHTML, 1);
+                window.location = "http://groupspaceuiuc.com/share_confirmation.html";
+            }
+
             addCards();
         </script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

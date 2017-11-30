@@ -53,7 +53,6 @@ class Database:
 
 	def queryTransaction(self, username):
 		queryString = "SELECT * FROM transaction WHERE username='" + username + "'"
-		print queryString
 		cursor = self.connection.cursor()
 		cursor.execute(queryString)
 		ret = []
@@ -61,3 +60,9 @@ class Database:
 			ret.append(c)
 		cursor.close()
 		return ret
+
+	def deleteTransaction(self, username, time):
+		command = "DELETE FROM transaction WHERE username='" + str(username) + "' AND time='" + str(time) + "'"
+		cursor = self.connection.cursor()
+		cursor.execute(command)
+		self.connection.commit()
