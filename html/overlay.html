@@ -194,7 +194,7 @@
 
       function secondaryCallBack(infowindow, name, rid){
         return function(){
-          infowindow.setContent(name + "<br><button type='button' class='btn btn-success' onclick='popConfirmation(\"" + rid + "\");'>Select</button>");
+          infowindow.setContent(name + "<br><button type='button' class='btn btn-primary' onclick='popConfirmation(\"" + rid + "\");'>Select</button>");
    		    infowindow.open(map, this);
         }
       }
