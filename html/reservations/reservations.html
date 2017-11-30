@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -16,7 +17,6 @@
     <link href="reservations.css" rel="stylesheet">
 
     <style>
-      .navbar
       {
         min-height: 4em;
       }
@@ -43,7 +43,7 @@
       }
     </style>
 
-  </head>
+</head>
 
   <body>
     <nav class="navbar navbar-light bg-light bg-dark p-2">
@@ -59,68 +59,102 @@
         </ul>
     </nav>
     <div class="container mt-5 mb-5 mx-auto">
-      
-      <h1 class="display-3 mb-5" id="Welcome-banner"></h1>
 
-      <div class="card-deck">
+        <h1 class="display-3 mb-5" id="Welcome-banner"></h1>
 
-        <div class="card mb-5 text-center bg-primary" id="add-card">
-            <button type="button" class="w-100 h-100 btn btn-primary btn-lg" href="#" onclick="gotoReserve();" id="add-button">Add Reservation</button>
-        </div>
+        <div class="card-deck" id="card-deck-container">
 
-        <div class="card mb-5 reservation-card">
-          <div class="hover-menu bg-light ">
-            <div class="button-container d-flex flex-column h-100 text-center">
-              <div class="my-auto">
-                <button type="button" class="btn btn-primary btn-lg menu-button align-self-center mb-3" href="#">Share</button>
-                <button type="button" class="btn btn-danger btn-lg menu-button align-self-center mb-3" data-toggle="modal" data-target="#deleteModal">Delete</button>
-              </div>
-
-            </div>
-          </div>
-            <h4 class="card-header text-center">Building and Room #</h4>
-            <ul class="list-group list-group-flush text-center">
-              <li class="list-group-item">Time Date and Duration</li>
-              <li class="list-group-item">White board</li>
-              <li class="list-group-item">Projector</li>
-              <li class="list-group-item">Noise Level</li>
-            </ul>
-        </div>
-
-        <!-- Delete Modal -->
-        <div class="modal fade" id="deleteModal" role="dialog">
-          <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">Delete Reservation</h4>
-              </div>
-              <div class="modal-body">
-                <p>Are you sure you want to delete this reservation?</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
-              </div>
+            <div class="card mb-5 text-center bg-primary" id="add-card">
+                <button type="button" class="w-100 h-100 btn btn-primary btn-lg" href="#" onclick="gotoReserve();" id="add-button">Add Reservation</button>
             </div>
 
-          </div>
+
+
+            <!-- Delete Modal -->
+            <div class="modal fade" id="deleteModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Delete Reservation</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete this reservation?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
+        <!-- /container -->
 
-    </div> <!-- /container -->
+        <footer id="footer">
+            <small>© Copyright MAAGIX 2017</small>
+        </footer>
 
-    <footer id="footer">
-      <small>© Copyright MAAGIX 2017</small>
-    </footer>
+        <script type="text/javascript">
+            if (typeof getUserName() == "undefined" || getUserName() == ""){
+              window.location="http://groupspaceuiuc.com/index.html";
+            }
+            document.getElementById("Welcome-banner").innerHTML = "Welcome, " + getCookies("username");
 
-    <script type="text/javascript">
-      document.getElementById("Welcome-banner").innerHTML = "Welcome, " + getCookies("username");
-      function gotoReserve(){
-        window.location = "http://groupspaceuiuc.com/reserve.html";
-      }
-    </script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-  </body>
+            function gotoReserve() {
+                window.location = "http://groupspaceuiuc.com/reserve.html";
+            }
+
+            var card_text = "<div class='card mb-5 reservation-card'><div class='hover-menu bg-light '><div class='button-container d-flex flex-column h-100 text-center'><div class='my-auto'><button type='button' class='btn btn-primary btn-lg menu-button align-self-center mb-3' href='#'>Share</button><button type='button' class='btn btn-danger btn-lg menu-button align-self-center mb-3' data-toggle='modal' data-target='#deleteModal'>Delete</button></div></div></div><h4 class='card-header text-center'>"
+            var card_text_before_room = "</h4><ul class='list-group list-group-flush text-center'><li class='list-group-item'>"
+            var card_text_before_time = "</li><li class='list-group-item'>"
+            var card_text_before_duration = "</li><li class='list-group-item'>"
+            var card_text_before_occupancy = "</li><li class='list-group-item'>"
+            var card_text_before_equip = "</li><li class='list-group-item'>"
+            var card_text_before_noise = "</li></ul></div>"
+            
+            function addCards(){
+              var xhttp = new XMLHttpRequest();
+              xhttp.open("GET", "http://groupspaceuiuc.com:5000/queryTransaction" + 
+                          "?username=" + getUserName(),
+                          false);
+              xhttp.send(null);
+              var queryResult = JSON.parse(xhttp.responseText);
+              for (var q in queryResult){
+                var time = queryResult[q].time;
+                var formalTime = new Date(time);
+                var now = new Date();
+                if (formalTime.getTime() < now.getTime()){
+                  continue;
+                }
+                var duration = queryResult[q].duration;
+                var xhttp2 = new XMLHttpRequest();
+                xhttp2.open("GET", "http://groupspaceuiuc.com:5000/queryRoom" + 
+                            "?rid=" + queryResult[q].rid,
+                            false);
+                xhttp2.send(null);
+                var roomSpecs = JSON.parse(xhttp2.responseText);
+                var roomname = roomSpecs.roomname;
+                var equipString = roomSpecs.equip;
+                var equip = getEquipNameFromString(equipString);
+                var noise = "Noise: " + roomSpecs.noise + "/10";
+                var occupancy = roomSpecs.occupancy + " people";
+                document.getElementById("card-deck-container").innerHTML += card_text 
+                                                                         + roomname + card_text_before_room
+                                                                         + time + card_text_before_time
+                                                                         + duration + card_text_before_duration
+                                                                         + occupancy + card_text_before_occupancy
+                                                                         + equip + card_text_before_equip
+                                                                         + noise + card_text_before_noise;
+              }
+            }
+            addCards();
+        </script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</body>
+
 </html>

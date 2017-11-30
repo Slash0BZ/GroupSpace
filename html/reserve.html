@@ -13,6 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="./util.js"></script>
     <script>
         function displayShare(selection) {
             var value = selection.options[selection.selectedIndex].value;
@@ -188,15 +189,15 @@
                       <div class="selection">
                           <div class="form-group">
                               <select class="form-control" id="num-in-group" onchange="displayShare(this)">
-                                <option value="one" selected>1 person</option>
-                                  <option value="two">2 people</option>
-                                  <option value="three">3 people</option>
-                                  <option value="four">4 people</option>
-                                  <option value="five">5 people</option>
-                                  <option value="six">6 people</option>
-                                  <option value="seven">7 people</option>
-                                  <option value="eight">8 people</option>
-                                  <option value="nine">More than 9 people</option>
+                                <option value="1" selected>1 person</option>
+                                  <option value="2">2 people</option>
+                                  <option value="3">3 people</option>
+                                  <option value="4">4 people</option>
+                                  <option value="5">5 people</option>
+                                  <option value="6">6 people</option>
+                                  <option value="7">7 people</option>
+                                  <option value="8">8 people</option>
+                                  <option value="9">More than 9 people</option>
                               </select>
                           </div>
                       </div>
@@ -221,10 +222,8 @@
                           <div class="selection">
                               <div class="form-group">
                                   <select class="form-control" id="equipment-choices" multiple="multiple">
-                                    <option>TV</option>
-                                      <option>Projector</option>
                                       <option>Whiteboard</option>
-                                      <option>Group table</option>
+                                      <option>Monitor</option>
                                   </select>
                               </div>
                           </div>
