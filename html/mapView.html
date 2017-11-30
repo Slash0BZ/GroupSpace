@@ -203,7 +203,7 @@
                   </tr>
           </table>
       </div>
-          <button class="btn-floating btn-lg" onclick="createPlaceMarkers();">Update</button>
+          <button class="btn-floating btn-lg btn-primary" onclick="createPlaceMarkers();">UPDATE</button>
         </div>
       </div>
 		</div>
@@ -243,7 +243,7 @@
    		},
    	});
    	google.maps.event.addListener(marker, 'click', function() {
-   		infowindow.setContent(getTranditionalPlaceName(place.name) + "<br><button type='button' class='btn btn-success' onclick='gotoOverlay(\"" + place.name + "\");'>Select</button>");
+   		infowindow.setContent(getTranditionalPlaceName(place.name) + "<br><button type='button' class='btn btn-primary' onclick='gotoOverlay(\"" + place.name + "\");'>Select</button>");
    		infowindow.open(map, this);
    	});
    }
