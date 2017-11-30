@@ -192,6 +192,13 @@
 
       google.maps.event.addDomListener(window, 'load', initMap);
 
+      function secondaryCallBack(infowindow, name, rid){
+        return function(){
+          infowindow.setContent(name + "<br><button type='button' class='btn btn-success' onclick='popConfirmation(\"" + rid + "\");'>Select</button>");
+   		    infowindow.open(map, this);
+        }
+      }
+
       //The function that create a marker for each candidate room.
       function createMarkersForRooms(map, infowindow){
         var params = getRequests();
@@ -211,11 +218,11 @@
         xhttp.send(null);
         var queryResult = JSON.parse(xhttp.responseText);
         for (var q in queryResult){
-          var name = queryResult[q].name;
-          if (floor == "4" && name.includes("Lower")){
+          rname = queryResult[q].name;
+          if (floor == "4" && rname.includes("Lower")){
             continue;
           }
-          if (floor == "B" && name.includes("Group")){
+          if (floor == "B" && rname.includes("Group")){
             continue;
           }
           var position = queryResult[q].position.split(",");
@@ -226,10 +233,7 @@
             map: map, 
             position: {lat: lat, lng: lng}
           });
-          google.maps.event.addListener(marker, 'click', function() {
-   	        infowindow.setContent(name + "<br><button type='button' class='btn btn-success' onclick='popConfirmation(\"" + rid + "\");'>Select</button>");
-   		      infowindow.open(map, this);
-          });
+          google.maps.event.addListener(marker, 'click', secondaryCallBack(infowindow, rname, rid));
         }
         /*
         google.maps.event.addListener(map, "click", function(e){
