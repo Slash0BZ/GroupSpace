@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Reserve a space</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="./util.js"></script>
+    <script>
+        function displayShare(selection) {
+            var value = selection.options[selection.selectedIndex].value;
+            if (value == "one") {
+                $("#single-person").show();
+            } else {
+                $("#single-person").hide();
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+
+    <style>
+        .center-align-page {
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .selection {
+            padding: 5px;
+        }
+        
+        .selection a {
+            text-decoration: none;
+            color: black;
+        }
+        
+        .selection-icon img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        .selection-icon {
+            padding: 5px;
+            width: 30px;
+            height: 30px;
+        }
+        
+        .group-reservation {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif
+        }
+        
+        #noise-slider .slider-selection {
+            background: #D3D3D3;
+        }
+        
+        .navbar {
+            min-height: 4em;
+            background-color: rgb(52, 58, 64);
+            border-radius: 0px;
+        }
+        
+        .navbar-brand {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        #title {
+            color: white;
+            margin: 0 auto;
+            font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+            font-size: 20px;
+        }
+        
+        .fa-power-off {
+            color: white;
+            font-size: 20px;
+            margin-top: 15px;
+        }
+        
+        .navbar-right {
+            margin-right: 0;
+        }
+        
+        #footer {
+            position: absolute;
+            bottom: 5px;
+            color: gray;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light p-2">
+        <div class="navbar-brand h1" id="title"><a href="index.html" style="text-decoration:none;color:white;">GroupSpace</a></div>
+        <div class="navbar-collapse collapse">
+            <ul class="navbar navbar-nav navbar-right">
+                <li>
+                    <a href="javascript:logout()">
+                        <span class="fa fa-power-off"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container center-align-page">
+        <br>
+        <br>
+        <h3 class="group-reservation center-align-page">
+              GroupSpace Reservation
+          </h3>
+        <br>
+        <br>
+        <div>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Select Basic Attributes</div>
+            </div>
+        </div>
+        <table class="center-align-page">
+            <tr>
+                <td>
+                    <div class="selection-icon"><img src="https://image.freepik.com/free-icon/round-clock-at-nine-oclock-outline_318-38748.jpg" /></div>
+                </td>
+                <td>
+                    <div class="selection">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" id="time" />
+                                <span class="input-group-addon">
+                                          <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(function() {
+                                $('#datetimepicker1').datetimepicker({
+                                    showClear: true,
+                                    showClose: true,
+                                    stepping: 15
+                                });
+                            });
+                        </script>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="selection-icon"><img src="http://moziru.com/images/hourglass-clipart-black-and-white-4.png" /></div>
+                </td>
+                <td>
+                    <div class="selection">
+                        <div class="form-group">
+                            <select class="form-control" id="duration">
+                                <option>30 minutes</option>
+                                <option>1 hour</option>
+                                <option>2 hours</option>
+                                <option>3 hours</option>
+                            </select>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="selection-icon"><img src="http://cliparting.com/wp-content/uploads/2016/10/Person-people-icon-clipart-kid.png" /></div>
+                </td>
+                <td>
+                    <div class="selection">
+                        <div class="form-group">
+                            <select class="form-control" id="num-in-group" onchange="displayShare(this)">
+                                <option value="1" selected>1 person</option>
+                                <option value="2">2 people</option>
+                                <option value="3">3 people</option>
+                                <option value="4">4 people</option>
+                                <option value="5">5 people</option>
+                                <option value="6">6 people</option>
+                                <option value="7">7 people</option>
+                                <option value="8">8 people</option>
+                                <option value="9">More than 9 people</option>
+                            </select>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="selection-icon"><img src="https://image.flaticon.com/icons/png/512/56/56763.png" /></div>
+                </td>
+                <td>
+                    <div class="selection">
+                        <a id="more-options-display" data-toggle="collapse" data-target="#hidden-part">More Options</a>
+                    </div>
+                </td>
+            </tr>
+            <tbody id="hidden-part" class="collapse">
+                <tr>
+                    <td>
+                        <div class="selection-icon"><img src="https://openclipart.org/image/2400px/svg_to_png/185201/1382215647.png" /></div>
+                    </td>
+                    <td>
+                        <div class="selection">
+                            <div class="form-group">
+                                <select class="form-control" id="equipment-choices" multiple="multiple">
+                                    <option>Whiteboard</option>
+                                    <option>Monitor</option>
+                                </select>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(function() {
+                                $('#equipment-choices').multiselect();
+                            });
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="selection-icon"><img src="http://www.clker.com/cliparts/P/a/H/w/Q/l/speaker-plain-hi.png" /></div>
+                    </td>
+                    <td>
+                        <label for="noise-level">Noise Level</label>
+                        <br>
+                        <input id="noise-level" data-slider-id='noise-slider' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" />
+                        <script>
+                            $('#noise-level').slider();
+                        </script>
+                    </td>
+                </tr>
+            </tbody>
+            <tr id="single-person">
+                <td>
+
+                </td>
+                <td>
+                    <span class="checkbox">
+                          <label><input type="checkbox" value="">Allow sharing rooms with others
+                              <a href="#" data-toggle="tooltip" title="Allow other single users to study with you in this room" data-placement="top" style="color:red;text-decoration:none;">?</a></label>
+                      </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" class="btn btn-lg btn-primary" value="SEARCH" onclick="sendValuesToMap();">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <footer id="footer">
+        <small>© Copyright MAAGIX 2017</small>
+    </footer>
+
+    <script type="text/javascript">
+        function sendValuesToMap() {
+            var time = $('#datetimepicker1').data("DateTimePicker").date();
+            var time_date = new Date(time);
+            var cur = new Date();
+            if (time_date < cur) {
+                alert("Please select a future time.");
+                return;
+            }
+            var duration = document.getElementById("duration").value;
+            var person = document.getElementById("num-in-group").value;
+            var equip = $.map($('#equipment-choices :selected'), function(e) {
+                return $(e).text();
+            });
+            var noise = document.getElementById("noise-level").value;
+            window.location = "http://groupspaceuiuc.com/mapView.html" +
+                "?time=" + time +
+                "&duration=" + duration +
+                "&person=" + person +
+                "&equip=" + "equip:" + equip +
+                "&noise=" + noise;
+        }
+    </script>
+</body>

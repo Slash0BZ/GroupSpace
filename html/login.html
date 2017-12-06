@@ -1,33 +1,115 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Hello, world!</title>
+    <title>Login</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="./util.js"></script>
+
+    <style>
+    .navbar
+    {
+        min-height: 4em;
+        background-color: rgb(52,58,64);
+        border-radius: 0px;
+    }
+
+    .navbar-right {
+        margin-right: 0;
+    }
+
+    .navbar-brand
+    {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    #title
+    {
+        color: white;
+        margin: 0 auto;
+        font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+        font-size: 20px;
+    }
+
+    .center {
+      margin: auto;
+      width: 40%;
+    }
+
+    .center-btn {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #login {
+      font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #footer {
+      position: absolute;
+      bottom: 5px;
+      color: gray;
+      width: 100%;
+      text-align: center;
+    }
+    </style>
+
   </head>
   <body>
-<form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <nav class="navbar navbar-light bg-light bg-dark p-2">
+        <div class="navbar-brand h1" id="title"><a href="index.html" style="text-decoration:none;color:white;">GroupSpace</a></div>
+    </nav>
+
+  <div class="center">
+    <br/><br/>
+    <h3 id="login">LOGIN</h3>
+    <br/>
+
+    <div class="form-group">
+      <label>NetID</label>
+      <input type="text" class="form-control" id="username" placeholder="Enter NetID">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Password">
+    </div>
+    <div class="center-btn">
+      <button type="submit" class="btn btn-primary" onclick="login();">Submit</button>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-check">
-    <label class="form-check-label">
-      <input type="checkbox" class="form-check-input">
-      Check me out
-    </label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+  <footer id="footer">
+    <small>© Copyright MAAGIX 2017</small>
+  </footer>
+
+<script type="text/javascript">
+
+  function login(){
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://groupspaceuiuc.com:5000/login?username=" + username + "&password=" + password, false);
+    //xhttp.setRequestHeader("Content-type", "text/plain");
+    xhttp.send(null);
+    var status = xhttp.responseText;
+    if (status != "failure"){
+      setCookie("username", username, 1);
+      window.location="http://groupspaceuiuc.com/index.html";
+    }
+    else{
+      alert("Wrong NetID-Password combination");
+    }
+  }
+</script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
