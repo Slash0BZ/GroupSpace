@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Share Reservation</title>
+        <title>Confirm Reservation</title>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -95,6 +95,11 @@
           width: 100%;
           text-align: center;
         }
+
+            .list-group-flush {
+                width: 70%;
+                margin: 0 auto;
+            }
         </style>
     </head>
 <body>
@@ -123,7 +128,8 @@
             <li class="list-group-item" id="noise"></li>
             <li class="list-group-item" id="equip"></li>
         </ul>
-        <button class='btn btn-primary' onclick="reserve();">Reserve</button>
+        <br/><br/>
+        <button class='btn btn-primary' onclick="reserve();">RESERVE</button>
     </div>
     <script>
         var params = getRequests()
