@@ -46,7 +46,7 @@ class Database:
 		return ret
 
 	def addTransaction(self, username, time, duration, rid):
-		command = "INSERT INTO transaction (uid, username, time, duration, rid, roomname, people) VALUES (0, '" + username + "', '" + time + "', '" + duration + "', '" + rid + "', 'none', 'none')"
+		command = "INSERT INTO transaction (username, time, duration, rid) VALUES ('" + username + "', '" + time + "', '" + duration + "', '" + rid + "')"
 		cursor = self.connection.cursor()
 		cursor.execute(command)
 		self.connection.commit()

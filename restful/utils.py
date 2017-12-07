@@ -12,5 +12,3 @@ def send_sharing_email(address, time, duration, rid):
 	s = smtplib.SMTP('localhost')
 	s.sendmail('noreply@groupspaceuiuc.com', [address], msg.as_string())
 	s.quit()	
-	
-send_sharing_email("xuanyuusa@outlook.com", "test", "test", 16)

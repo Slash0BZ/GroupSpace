@@ -43,7 +43,7 @@ def handle_getRoom():
 		cur = {}
 		cur["rid"] = entry[0]
 		cur["name"] = entry[1]
-		cur["position"] = entry[7]
+		cur["position"] = entry[6]
 		output.append(cur)
 	return json.dumps(output)
 
@@ -78,9 +78,9 @@ def handle_queryTransaction():
 	output = []
 	for entry in result:
 		cur = {}
-		cur["time"] = entry[2]
-		cur["duration"] = entry[3]
-		cur["rid"] = entry[4]
+		cur["time"] = entry[1]
+		cur["duration"] = entry[2]
+		cur["rid"] = entry[3]
 		output.append(cur)
 	return json.dumps(output)
 
