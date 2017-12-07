@@ -12,21 +12,22 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="./util.js"></script>
     <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
         .navbar {
             min-height: 4em;
             background-color: rgb(52, 58, 64);
             border-radius: 0px;
         }
-        
-        .navbar-right {
-            margin-right: 0;
-        }
 
         .navbar-brand {
-            position: absolute;
-            width: 100%;
             left: 0;
             text-align: center;
+            font-weight: bold;
         }
 
         #title {
@@ -34,7 +35,6 @@
             margin: 0 auto;
             font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
             font-size: 20px;
-            font-weight: bold;
         }
 
         .page-title {
@@ -50,7 +50,6 @@
         .fa-power-off {
             font-size: 20px;
             color: white;
-            padding-top: 15px;
         }
 
         #footer {
@@ -66,21 +65,24 @@
             margin: 0 auto;
         }
 
+        .navbar-logo {
+            width: 120px;
+        }
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-light bg-light bg-dark p-2">
-        <div class="navbar-brand h1" id="title"><a href="index.html" style="text-decoration:none; color:white">GroupSpace</a></div>
-        <div class="navbar-collapse collapse">
-            <ul class="navbar navbar-nav navbar-right">
-                <li>
-                    <a href="javascript:logout()">
-                        <span class="fa fa-power-off"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <ul class="navbar-nav navbar-logo mx-auto">
+            <li>
+                <a class="navbar-brand h1" id="title" href="index.html" style="text-decoration:none;color:white;">GroupSpace</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav pull-sm-right">
+            <li>
+                <a href="javascript:logout()"><span class="fa fa-power-off"></span></a>
+            </li>
+        </ul>
     </nav>
     <div class="container">
         <br/>
