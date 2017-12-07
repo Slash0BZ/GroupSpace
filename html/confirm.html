@@ -65,6 +65,10 @@
             width: 50%;
             margin: 0 auto;
         }
+        
+        .list-group {
+            width:50%;
+        }
 
     </style>
 </head>
@@ -89,9 +93,9 @@
         <br/>
         <br/>
         <div id="progressBar" class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Select Basic Attributes</div>
-            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Select Library</div>
-            <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Select Room</div>
+            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><a onclick="window.history.go(-4);">Select Basic Attributes</a></div>
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><a onclick="window.history.go(-3);">Select Library</a></div>
+            <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><a onclick="window.history.go(-2);">Select Room</a></div>
             <div class="progress-bar progress-bar-stripe bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Confirm</div>
         </div>
         <div class="card" style="text-align:center;">
@@ -109,6 +113,11 @@
         </div>
         <script>
             var params = getRequests()
+            if ("rid" in params == false){
+                alert("Please start from the first step.");
+                window.location = "http://groupspaceuiuc.com/index.html";
+                exit();
+            }
             var rid = params["rid"];
             var xhttp = new XMLHttpRequest();
             xhttp.open("GET", "http://groupspaceuiuc.com:5000/queryRoom" +

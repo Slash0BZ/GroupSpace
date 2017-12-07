@@ -313,10 +313,25 @@
     </nav>
     <div id="wrapper">
         <div id="progressBar" class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Select Basic Attributes</div>
-            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Select Library</div>
+            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><a onclick="window.history.go(decideGoBackSteps('basic'));">Select Basic Attributes</a></div>
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><a onclick="window.history.go(decideGoBackSteps(0));">Select Library</a></div>
             <div class="progress-bar bg-info" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Select Room</div>
         </div>
+        <script>
+            function decideGoBackSteps(q){
+                var params = getRequests();
+                if ('floor' in  params){
+                    if (q == "basic"){
+                        return -3;
+                    }
+                    return -2;
+                }
+                if (q == "basic"){
+                    return -2; 
+                }
+                return -1;
+            }
+        </script>
         <div id="over_map">
 
             <div class="card">
